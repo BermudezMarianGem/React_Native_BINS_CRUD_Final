@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Button, Text, ScrollView, TouchableOpacity, StyleSheet, ActivityIndicator, FlatList} from 'react-native';
+import {View, Button, Text, ScrollView, TouchableOpacity, StyleSheet, ActivityIndicator, FlatList, Alert} from 'react-native';
 import { openDatabase } from 'react-native-sqlite-storage';
 
 const db = openDatabase({
@@ -19,7 +19,7 @@ const RecordDetailScreen = ( {navigation, route} ) => {
     const [civilstatus, setCivilStatus] = useState(route.params.item.civilstatus);
     const [sitio, setSitio] = useState(route.params.item.sitio);
 
-    deleteItem = () => {
+    deleteRecord = () => {
         db.transaction(txn => {
           txn.executeSql(
             'DELETE FROM records WHERE id = ?',
@@ -65,7 +65,7 @@ const RecordDetailScreen = ( {navigation, route} ) => {
                     <Button
                         title="Delete"
                         color="darkred" 
-                        onPress={ () => { deleteItem() }}
+                        onPress={ () => { deleteRecord() }}
                     />
                 </View>
             </View>
