@@ -26,16 +26,12 @@ const binsApp = () => {
             headerShown: false
           }}
         />
+        
         <Stack.Screen
           name="RecordDetailScreen"
           component={ RecordDetailScreen }
           options={{ 
             title: 'RecordDetailScreen', 
-            headerRight: () => (
-              <Button
-              onPress={() => alert('This is a button!')}
-              title="Info"
-              color="#000"></Button>)
           }}
           
         />

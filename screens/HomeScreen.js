@@ -81,69 +81,75 @@ const HomeScreen = ( {navigation} ) => {
 
     return(
         <View>
-            <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
-            <Text>Barangay Information Management System</Text>
+          <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
+            <Text style = {styles.title1}>Barangay Information Management System</Text>
             <View>
-                <Text>Resident Record List</Text>
-                <View>
-                <FlatList 
-                    data={ records }
-                    renderItem = {({ item }) => (
-                    <View>
+                <Text style = {styles.title2}>Resident Record List</Text>
+                <TouchableOpacity style = {styles.addButton} onPress={() => { navigation.navigate('AddResident'); }}>
+                  <Text style={styles.btnText}>Add Record</Text>
+                </TouchableOpacity>
+                  <FlatList 
+                      data={ records }
+                      renderItem = {({ item }) => (
                         <TouchableOpacity onPress={() => { navigation.navigate('RecordDetailScreen', {item:item} ); }}>
-                        <Text style={{ color: item.color }}>{ item.firstname }</Text>
+                        <View  style={styles.contentBox}>
+                          <Text style={styles.contextText}>{ item.firstname }</Text>
+                        </View>
                         </TouchableOpacity>
-                    </View>
-                    )}
-                    />
-                </View>
+                      )}
+                  />
             </View>
-            </ScrollView>
-            <TouchableOpacity style = {styles.addButton} onPress={() => { navigation.navigate('AddResident'); }}>
-                <Text style = {{ color: 'white' }}>Add Record</Text>
-            </TouchableOpacity>
+          </ScrollView>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    btnText:{
-    color: 'white',
-    fontSize: 14,
-    padding: 8,
-    textAlign: 'center',
-    fontWeight: 'bold',
+    title1: {
+      fontWeight: 'bold',
+      fontSize: 18,
+      alignSelf: 'center',
+      padding: 10,
+      backgroundColor: '#002E94',
+      color: 'white',
+      borderRadius: 10,
+      marginTop: 10,
     },
-    btn:{
-    backgroundColor: 'rgb(80, 140, 2)',
-    color: 'white',
-    width: 150,
-    height: 35,
-    borderRadius: 5,
-    alignSelf: 'center',
-    marginBottom: 100
+    title2:{
+      fontWeight: 'bold',
+      fontSize: 17,
+      marginTop: 20,
+      marginLeft: 10,
     },
     addButton: {
-    position: 'absolute',
-    width: 50,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    right: 30,
-    bottom: -50,
-    backgroundColor: '#15D005',
-    borderRadius: 50,
+      position: 'absolute',
+      width: 133,
+      height: 30,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#5F9DF7',
+      borderRadius: 10,
+      marginTop: 18,
+      marginLeft: 250,
     },
-    input: {
-    padding: 2,
-    height: 40,
-    backgroundColor: '#E8E8E8',
-    borderRadius: 10,
-    shadowRadius: 10,
-    fontSize: 14,
-    textAlign:'center',
-    color: 'black',
+    btnText: {
+      fontWeight: 'bold',
+      color: 'white',
     },
+    contentBox: {
+      backgroundColor: '#E1CEB5',
+      height: 50,
+      marginTop: 15,
+      marginLeft: 10,
+      marginRight: 10,
+      borderRadius: 5,
+    },
+    contextText: {
+      fontWeight: 'bold',
+      fontSize: 15,
+      marginLeft: 10,
+      marginTop: 12,
+    }
 })
 
 export default HomeScreen;
