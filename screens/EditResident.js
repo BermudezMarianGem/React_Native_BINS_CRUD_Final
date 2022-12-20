@@ -43,8 +43,11 @@ const EditResidentScreen = ( {navigation, route} ) => {
     return(
         <View>
             <Text style={styles.title1}>Barangay Information Management System</Text>
-            <View>
+            <ScrollView>
                 <Text style={styles.title2}>Edit Resident</Text>
+                <TouchableOpacity style = {styles.addButton} onPress={() => { navigation.navigate('HomeScreen'); }}>
+                  <Text style={styles.btnText}>Back</Text>
+                </TouchableOpacity>
                 <View style={styles.contentBox}>
                     <Text style={styles.contextText}>Firstname</Text>
                     <TextInput 
@@ -82,7 +85,7 @@ const EditResidentScreen = ( {navigation, route} ) => {
                     maxLength={30} 
                     defaultValue = {route.params.occupation}
                     />
-                    <Text style={styles.contextText}>Birthday</Text>
+                    <Text style={styles.contextText}>Birthday (DD/MM/YYYY)</Text>
                     <TextInput 
                     style={styles.inputBox}
                     onChangeText = { (text) => [setBirthdate(text)] }
@@ -113,7 +116,7 @@ const EditResidentScreen = ( {navigation, route} ) => {
                 <TouchableOpacity style ={styles.editBtn} onPress={ updateRecords }>
                     <Text style={styles.editText}>Update Record</Text>
                 </TouchableOpacity>
-            </View>
+            </ScrollView>
         </View>
     )
 }
@@ -128,6 +131,21 @@ const styles = StyleSheet.create({
       color: 'white',
       borderRadius: 10,
       marginTop: 10,
+    },
+    addButton: {
+      position: 'absolute',
+      width: 133,
+      height: 30,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#5F9DF7',
+      borderRadius: 10,
+      marginTop: 18,
+      marginLeft: 250,
+    },
+    btnText: {
+    fontWeight: 'bold',
+    color: 'white',
     },
     title2:{
         fontWeight: 'bold',

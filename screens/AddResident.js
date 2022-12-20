@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, Button, Text, ScrollView, TouchableOpacity, StyleSheet, TextInput} from 'react-native';
 import { openDatabase } from 'react-native-sqlite-storage';
+import { Dropdown } from 'react-native-element-dropdown';
 
 const db = openDatabase({
     name: 'recordDB',
@@ -18,6 +19,25 @@ const AddResidentScreen = ( {navigation} ) => {
     const [civilstatus, setCivilStatus] = useState('');
     const [sitio, setSitio] = useState('');
     const [records, setRecords] = useState([]);
+
+    const [isFocusCivilStatus, setIsFocusCivilStatus] = useState(false);
+    const civilstatusList = [
+        { label: 'Single', value: 'Single'},
+        { label: 'Married', value: 'Married'},
+        { label: 'Widowed', value: 'Widowed'},
+        { label: 'Seperated', value: 'Seperated'},
+    ];
+
+    const [isFocusSitio, setIsFocusSitio] = useState(false);
+    const sitioList = [
+        { label: 'Ilaya', value: 'Ilaya'},
+        { label: 'Centro', value: 'Centro'},
+        { label: 'Pinagpala', value: 'Pinagpala'},
+        { label: 'Sambat', value: 'Sambat'},
+        { label: 'Don Elpidio', value: 'Don Elpidio'},
+        { label: 'White House', value: 'White House'},
+        { label: 'Green Heights', value: 'Green Heights'},
+    ];
 
     const getRecords = () => {
         db.transaction(txn => {
@@ -104,8 +124,11 @@ const AddResidentScreen = ( {navigation} ) => {
     return(
         <View>
             <Text style={styles.title1}>Barangay Information Management System</Text>
-            <View>
+            <ScrollView>
                 <Text style={styles.title2}>Add Resident</Text>
+                <TouchableOpacity style = {styles.addButton} onPress={() => { navigation.navigate('HomeScreen'); }}>
+                  <Text style={styles.btnText}>Back</Text>
+                </TouchableOpacity>
                 <View>
                     <Text style={styles.contextText}>Firstname: </Text>
                     <TextInput 
@@ -139,7 +162,7 @@ const AddResidentScreen = ( {navigation} ) => {
                         placeholderTextColor= 'gray'
                         maxLength={30} 
                     />
-                    <Text style={styles.contextText}>Birthday: </Text>
+                    <Text style={styles.contextText}>Birthday (DD/MM/YYYY): </Text>
                     <TextInput 
                         style = { styles.input }
                         onChangeText = { (text) => [setBirthdate(text)] }
@@ -148,27 +171,47 @@ const AddResidentScreen = ( {navigation} ) => {
                         maxLength={30} 
                     />
                     <Text style={styles.contextText}>Civil Status: </Text>
-                    <TextInput 
-                        style = { styles.input }
-                        onChangeText = { (text) => [setCivilStatus(text)] }
-                        placeholder='Enter Civil Status'
-                        placeholderTextColor= 'gray'
-                        maxLength={30} 
+                    <Dropdown
+                    style={[styles.input, isFocusCivilStatus && { borderColor: 'green' }]}
+                    placeholderStyle={styles.placeholderStyle}
+                    selectedTextStyle={styles.selectedTextStyle}
+                    data={civilstatusList}
+                    maxHeight={300}
+                    labelField="label"
+                    valueField="value"
+                    placeholder={!isFocusCivilStatus ? 'Select Civil Status' : '...'}
+                    value={civilstatus}
+                    onFocus={() => setIsFocusCivilStatus(true)}
+                    onBlur={() => setIsFocusCivilStatus(false)}
+                    onChange={item => {
+                        setCivilStatus(item.value);
+                        setIsFocusCivilStatus(false);
+                    }}
                     />
                     <Text style={styles.contextText}>Sitio: </Text>
-                    <TextInput 
-                        style = { styles.input }
-                        onChangeText = { (text) => [setSitio(text)] }
-                        placeholder='Enter Sitio'
-                        placeholderTextColor= 'gray'
-                        maxLength={30} 
+                    <Dropdown
+                    style={[styles.input, isFocusSitio && { borderColor: 'green' }]}
+                    placeholderStyle={styles.placeholderStyle}
+                    selectedTextStyle={styles.selectedTextStyle}
+                    data={sitioList}
+                    maxHeight={300}
+                    labelField="label"
+                    valueField="value"
+                    placeholder={!isFocusSitio ? 'Select Sitio' : '...'}
+                    value={sitio}
+                    onFocus={() => setIsFocusSitio(true)}
+                    onBlur={() => setIsFocusSitio(false)}
+                    onChange={item => {
+                        setSitio(item.value);
+                        setIsFocusSitio(false);
+                    }}
                     />
 
                     <TouchableOpacity style = {styles.editBtn} onPress={ addResident }>
                         <Text style = {styles.editText}>Add Record</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </ScrollView>
         </View>
     )
 }
@@ -183,6 +226,21 @@ const styles = StyleSheet.create({
         color: 'white',
         borderRadius: 10,
         marginTop: 10,
+    },
+    addButton: {
+    position: 'absolute',
+    width: 133,
+    height: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#5F9DF7',
+    borderRadius: 10,
+    marginTop: 18,
+    marginLeft: 250,
+    },
+    btnText: {
+    fontWeight: 'bold',
+    color: 'white',
     },
     title2:{
         fontWeight: 'bold',

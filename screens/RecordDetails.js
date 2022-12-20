@@ -40,6 +40,9 @@ const RecordDetailScreen = ( {navigation, route} ) => {
             <Text style={styles.title1}>Barangay Information Management System</Text>
             <View>
                 <Text style={styles.title2}>Resident Details</Text>
+                <TouchableOpacity style = {styles.addButton} onPress={() => { navigation.navigate('HomeScreen'); }}>
+                  <Text style={styles.btnText}>Back</Text>
+                </TouchableOpacity>
                 <View style={styles.contentBox}>
                     <Text style={styles.contentText}>Resident ID: {id}</Text>
                     <Text style={styles.contentText2}>Name: {firstname} {middlename} {lastname}</Text>
@@ -79,6 +82,21 @@ const styles = StyleSheet.create({
         color: 'white',
         borderRadius: 10,
         marginTop: 10,
+    },
+    addButton: {
+    position: 'absolute',
+    width: 133,
+    height: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#5F9DF7',
+    borderRadius: 10,
+    marginTop: 18,
+    marginLeft: 250,
+    },
+    btnText: {
+    fontWeight: 'bold',
+    color: 'white',
     },
     title2:{
         fontWeight: 'bold',
