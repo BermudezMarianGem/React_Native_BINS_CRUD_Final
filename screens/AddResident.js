@@ -103,10 +103,11 @@ const AddResidentScreen = ( {navigation} ) => {
 
     return(
         <View>
-            <Text>Barangay Information Management System</Text>
+            <Text style={styles.title1}>Barangay Information Management System</Text>
             <View>
-                <Text>Add Resident</Text>
+                <Text style={styles.title2}>Add Resident</Text>
                 <View>
+                    <Text style={styles.contextText}>Firstname: </Text>
                     <TextInput 
                         style = { styles.input }
                         onChangeText = { (text) => [setFirstname(text)] }
@@ -114,7 +115,7 @@ const AddResidentScreen = ( {navigation} ) => {
                         placeholderTextColor= 'gray'
                         maxLength={30} 
                     />
-
+                    <Text style={styles.contextText}>Middlename: </Text>
                     <TextInput 
                         style = { styles.input }
                         onChangeText = { (text) => [setMiddlename(text)] }
@@ -122,7 +123,7 @@ const AddResidentScreen = ( {navigation} ) => {
                         placeholderTextColor= 'gray'
                         maxLength={30} 
                     />
-
+                    <Text style={styles.contextText}>Lastname: </Text>
                     <TextInput 
                         style = { styles.input }
                         onChangeText = { (text) => [setLastname(text)] }
@@ -130,7 +131,7 @@ const AddResidentScreen = ( {navigation} ) => {
                         placeholderTextColor= 'gray'
                         maxLength={30} 
                     />
-
+                    <Text style={styles.contextText}>Occupation: </Text>
                     <TextInput 
                         style = { styles.input }
                         onChangeText = { (text) => [setOccupation(text)] }
@@ -138,7 +139,7 @@ const AddResidentScreen = ( {navigation} ) => {
                         placeholderTextColor= 'gray'
                         maxLength={30} 
                     />
-
+                    <Text style={styles.contextText}>Birthday: </Text>
                     <TextInput 
                         style = { styles.input }
                         onChangeText = { (text) => [setBirthdate(text)] }
@@ -146,7 +147,7 @@ const AddResidentScreen = ( {navigation} ) => {
                         placeholderTextColor= 'gray'
                         maxLength={30} 
                     />
-
+                    <Text style={styles.contextText}>Civil Status: </Text>
                     <TextInput 
                         style = { styles.input }
                         onChangeText = { (text) => [setCivilStatus(text)] }
@@ -154,7 +155,7 @@ const AddResidentScreen = ( {navigation} ) => {
                         placeholderTextColor= 'gray'
                         maxLength={30} 
                     />
-
+                    <Text style={styles.contextText}>Sitio: </Text>
                     <TextInput 
                         style = { styles.input }
                         onChangeText = { (text) => [setSitio(text)] }
@@ -163,8 +164,8 @@ const AddResidentScreen = ( {navigation} ) => {
                         maxLength={30} 
                     />
 
-                    <TouchableOpacity style = {styles.btn} onPress={ addResident }>
-                        <Text style = {styles.btnText}>Add Record</Text>
+                    <TouchableOpacity style = {styles.editBtn} onPress={ addResident }>
+                        <Text style = {styles.editText}>Add Record</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -173,31 +174,54 @@ const AddResidentScreen = ( {navigation} ) => {
 }
 
 const styles = StyleSheet.create({
+    title1: {
+        fontWeight: 'bold',
+        fontSize: 18,
+        alignSelf: 'center',
+        padding: 10,
+        backgroundColor: '#002E94',
+        color: 'white',
+        borderRadius: 10,
+        marginTop: 10,
+    },
+    title2:{
+        fontWeight: 'bold',
+        fontSize: 17,
+        marginTop: 20,
+        marginLeft: 10,
+    },
+    contextText: {
+        marginLeft: 10,
+        marginTop: 10,
+        fontWeight: 'bold',
+        fontSize: 16,
+    },
     input: {
     padding: 2,
     height: 40,
     marginBottom: 5,
+    marginLeft: 10,
+    marginRight: 10,
     marginTop: 5,
+    borderWidth: 1,
     borderColor: 'gray',
-    borderBottomWidth: 1.5,
-    shadowRadius: 10,
+    borderRadius: 5,
     fontSize: 16,
     color: 'black',
     },
-    btnText:{
-    color: 'white',
-    fontSize: 14,
-    padding: 8,
-    textAlign: 'center',
-    fontWeight: 'bold',
-    },
-    btn:{
-    backgroundColor: 'orange',
-    width: 150,
+    editBtn: {
+    backgroundColor: '#2192FF',
+    width: 120,
     height: 35,
     borderRadius: 5,
-    alignSelf: 'center',
-    marginBottom: 100
+    marginLeft: 130,
+    },
+    editText: {
+        alignSelf: 'center',
+        fontWeight: 'bold',
+        fontSize: 15,
+        color: 'white',
+        marginTop: 5,
     },
     dropdown: {
     height: 50,

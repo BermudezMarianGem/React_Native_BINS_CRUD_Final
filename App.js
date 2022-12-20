@@ -46,7 +46,13 @@ const binsApp = () => {
           name="AddResident"
           component={ AddResidentScreen }
           options={{ 
-            title: 'AddResident'
+            title: 'AddResident',
+            headerRight: () => (
+              <Button
+              onPress={() => alert('This is a button!')}
+              title="Info"
+              color="#000"></Button>),
+            headerShown: false
           }}
           
         />
