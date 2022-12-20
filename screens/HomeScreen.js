@@ -92,7 +92,7 @@ const HomeScreen = ( {navigation} ) => {
                       data={ records }
                       renderItem = {({ item }) => (
                         <TouchableOpacity onPress={() => { navigation.navigate('RecordDetailScreen', {item:item} ); }}>
-                        <View  style={styles.contentBox}>
+                        <View style={styles.contentBox}>
                           <Text style={styles.contextText}>{ item.firstname }</Text>
                         </View>
                         </TouchableOpacity>

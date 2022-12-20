@@ -19,7 +19,7 @@ const RecordDetailScreen = ( {navigation, route} ) => {
     const [civilstatus, setCivilStatus] = useState(route.params.item.civilstatus);
     const [sitio, setSitio] = useState(route.params.item.sitio);
 
-    deleteRecord = () => {
+    const deleteRecord = () => {
         db.transaction(txn => {
           txn.executeSql(
             'DELETE FROM records WHERE id = ?',
@@ -37,20 +37,19 @@ const RecordDetailScreen = ( {navigation, route} ) => {
 
     return(
         <View>
-            <Text>Barangay Information Management System</Text>
+            <Text style={styles.title1}>Barangay Information Management System</Text>
             <View>
-                <Text>Resident Details</Text>
-                <View>
-                    <Text>{id}</Text>
-                    <Text>{firstname}</Text>
-                    <Text>{middlename}</Text>
-                    <Text>{lastname}</Text>
-                    <Text>{occupation}</Text>
-                    <Text>{birthdate}</Text>
-                    <Text>{civilstatus}</Text>
-                    <Text>{sitio}</Text>
-
-                    <TouchableOpacity onPress={() => { navigation.navigate('EditResident', {
+                <Text style={styles.title2}>Resident Details</Text>
+                <View style={styles.contentBox}>
+                    <Text style={styles.contentText}>Resident ID: {id}</Text>
+                    <Text style={styles.contentText2}>Name: {firstname} {middlename} {lastname}</Text>
+                    <Text style={styles.contentText2}>Occupation: {occupation}</Text>
+                    <Text style={styles.contentText2}>Birthday: {birthdate}</Text>
+                    <Text style={styles.contentText2}>Civil Status: {civilstatus}</Text>
+                    <Text style={styles.contentText2}>Sitio: {sitio}</Text>
+                </View>
+                
+                <TouchableOpacity style ={styles.editBtn} onPress={() => { navigation.navigate('EditResident', {
                         key:id, 
                         firstname:firstname, 
                         middlename:middlename, 
@@ -60,37 +59,72 @@ const RecordDetailScreen = ( {navigation, route} ) => {
                         civilstatus:civilstatus,
                         sitio:sitio
                         } ); }}>
-                        <Text style={{ color: 'black' }}>Edit</Text>
-                    </TouchableOpacity>
-                    <Button
-                        title="Delete"
-                        color="darkred" 
-                        onPress={ () => { deleteRecord() }}
-                    />
-                </View>
+                    <Text style={styles.editText}>Edit Record</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.deleteBtn} onPress={ deleteRecord }>
+                    <Text style={styles.editText}>Delete Record</Text>
+                </TouchableOpacity>
             </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    input: {
-    padding: 2,
-    height: 40,
-    marginBottom: 5,
-    marginTop: 5,
-    borderColor: 'gray',
-    borderBottomWidth: 1.5,
-    shadowRadius: 10,
-    fontSize: 16,
-    color: 'black',
+    title1: {
+        fontWeight: 'bold',
+        fontSize: 18,
+        alignSelf: 'center',
+        padding: 10,
+        backgroundColor: '#002E94',
+        color: 'white',
+        borderRadius: 10,
+        marginTop: 10,
     },
-    btnText:{
-    color: 'white',
-    fontSize: 14,
-    padding: 8,
-    textAlign: 'center',
-    fontWeight: 'bold',
+    title2:{
+        fontWeight: 'bold',
+        fontSize: 17,
+        marginTop: 20,
+        marginLeft: 10,
+    },
+    contentBox: {
+        backgroundColor: '#E1CEB5',
+        margin: 10,
+        borderRadius: 5,
+        paddingBottom: 10,
+    },
+    contentText: {
+        fontWeight: 'bold',
+        marginLeft: 10,
+        marginTop: 10,
+        fontSize: 15,
+    },
+    contentText2:{
+        fontWeight: 'bold',
+        marginLeft: 10,
+        marginTop: 3,
+        fontSize: 15,
+    },
+    editBtn: {
+        backgroundColor: '#2192FF',
+        width: 120,
+        height: 35,
+        borderRadius: 5,
+        marginLeft: 10,
+    },
+    editText: {
+        alignSelf: 'center',
+        fontWeight: 'bold',
+        fontSize: 15,
+        color: 'white',
+        marginTop: 5,
+    },
+    deleteBtn: {
+        backgroundColor: '#850000',
+        width: 120,
+        height: 35,
+        borderRadius: 5,
+        marginLeft: 140,
+        marginTop: -35,
     },
     btn:{
     backgroundColor: 'orange',
